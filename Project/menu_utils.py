@@ -1,14 +1,16 @@
 import pygame
-from levels_utils import *
 from abstract_manager import *
-from constants import *
 
 # CONSTANTS
 button1_width = 200
 button1_height = 70
+DISPLAY_WIDTH = 800
+DISPLAY_HEIGHT = 600
 
 class Menu_Manager(Abstract_Manager):
     def __init__(self):
+        self.new_manager = None
+        self.change_manager = False
         self.run = True
         #self.background = pygame.transform.scale(pygame.image.load('images/circuit.jpg'),(DISPLAY_WIDTH,DISPLAY_HEIGHT))
         self.game_title = 'Will it light up?'
@@ -27,13 +29,9 @@ class Menu_Manager(Abstract_Manager):
         rect.center = (DISPLAY_WIDTH/2,DISPLAY_HEIGHT*(1/4))
         screen.blit(surface,rect)
         pygame.draw.rect(screen, (100, 100, 100), ((DISPLAY_WIDTH / 2) - (button1_width / 2), DISPLAY_HEIGHT * (1 / 2.3), button1_width, button1_height))
-
-        manager_num = self.check_events(screen)
-        return manager_num
-
+        self.check_events(screen)
 
     def check_events(self,screen):
-        manager_num = 0
 
         for event in pygame.event.get():
 
@@ -44,7 +42,8 @@ class Menu_Manager(Abstract_Manager):
             if ((DISPLAY_WIDTH / 2) - (button1_width/2))<mouse[0]<((DISPLAY_WIDTH / 2) + (button1_width/2)) and DISPLAY_HEIGHT * (1 / 2.3)<mouse[1]<DISPLAY_HEIGHT * (1 / 2.3)+button1_height:
                 pygame.draw.rect(screen, (204, 0, 0),((DISPLAY_WIDTH / 2) - (button1_width/2), DISPLAY_HEIGHT * (1 / 2.3), button1_width, button1_height))
                 if pygame.mouse.get_pressed()[0]:
-                    manager_num = 1
+                    self.change_manager = True
+                    self.new_manager = 1
 
             else:
                 pygame.draw.rect(screen, (100, 100, 100),((DISPLAY_WIDTH / 2) - (button1_width/2), DISPLAY_HEIGHT * (1 / 2.3), button1_width, button1_height))
@@ -54,5 +53,3 @@ class Menu_Manager(Abstract_Manager):
             screen.blit(bsurf1,brect1)
 
             pygame.display.update()
-
-        return manager_num

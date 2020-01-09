@@ -1,7 +1,7 @@
 import pygame
-from constants import *
 from levels_utils import *
 from menu_utils import *
+from managers_handler import *
 
 
 # initialize pygame
@@ -16,14 +16,8 @@ pygame.display.set_caption('Will it light up?')
 # initialize the events manager
 manager = Menu_Manager()
 
-run = True
-actual_manager = 0
-
-while run:
-    manager_num = manager.run_screen(screen)
-    if(manager_num!=actual_manager):
-        if manager_num == 0:
-            manager = Menu_Manager()
-        elif manager_num == 1:
-            manager = Levels_Manager()
-    run = manager.run
+while manager.run:
+    manager.run_screen(screen)
+    if manager.change_manager:
+        index = manager.new_manager
+        manager = manager_list[index]()
