@@ -84,8 +84,8 @@ class Normal_Manager(Abstract_Manager):
                     rec.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 3.5))
                     led = pygame.image.load(led_on)
                 else:
-                    screen.fill((100,100,100))
-                    surf, rec = self.text_objects(('Wrong Answer!'), self.feedback_config, (255, 0, 0))
+                    screen.fill((255,0,0))
+                    surf, rec = self.text_objects(('Wrong Answer!'), self.feedback_config, (255,255,255))
                     rec.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 3.5))
                     led = pygame.image.load(led_off)
                 screen.blit(surf,rec)
