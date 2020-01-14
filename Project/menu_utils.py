@@ -15,8 +15,8 @@ class Menu_Manager(Abstract_Manager):
         #self.background = pygame.transform.scale(pygame.image.load('images/circuit.jpg'),(DISPLAY_WIDTH,DISPLAY_HEIGHT))
         self.game_title = 'Will it light up?'
 
-    def text_objects(self, text, font):
-        surface = font.render(text,True,(255,255,255))
+    def text_objects(self, text, font, color):
+        surface = font.render(text,True, color)
         return surface, surface.get_rect()
 
     def font_config(self,size):
@@ -25,7 +25,7 @@ class Menu_Manager(Abstract_Manager):
     # abstract method
     def run_screen(self,screen):
         screen.fill((0, 0, 40))
-        surface, rect = self.text_objects(self.game_title, self.font_config(50))
+        surface, rect = self.text_objects(self.game_title, self.font_config(50),(255,255,255))
         rect.center = (DISPLAY_WIDTH/2,DISPLAY_HEIGHT*(1/4))
         screen.blit(surface,rect)
         self.check_events(screen)
@@ -47,7 +47,7 @@ class Menu_Manager(Abstract_Manager):
             else:
                 pygame.draw.rect(screen, (100, 100, 100),((DISPLAY_WIDTH / 2) - (button1_width/2), DISPLAY_HEIGHT * (1 / 2.3), button1_width, button1_height))
 
-            bsurf1, brect1 = self.text_objects('Play', self.font_config(30))
+            bsurf1, brect1 = self.text_objects('Play', self.font_config(30),(255,255,255))
             brect1.center = ((DISPLAY_WIDTH/2),(DISPLAY_HEIGHT * (1 / 2.3) + button1_height/2))
             screen.blit(bsurf1,brect1)
 

@@ -18,8 +18,8 @@ class Levels_Manager(Abstract_Manager):
         self.message_config = pygame.font.Font('./fonts/The Led Display St.ttf', 40)
         self.button_config = pygame.font.Font('./fonts/The Led Display St.ttf', 30)
 
-    def text_objects(self, text, font):
-        surface = font.render(text,True,(255,255,255))
+    def text_objects(self, text, font,color):
+        surface = font.render(text,True,color)
         return surface, surface.get_rect()
 
     def font_config(self,size):
@@ -36,14 +36,14 @@ class Levels_Manager(Abstract_Manager):
         else:
             pygame.draw.rect(screen, ic, (x, y, BUTTON_WIDTH, BUTTON_HEIGHT))
 
-        textSurf, textRect = self.text_objects(msg, self.button_config)
+        textSurf, textRect = self.text_objects(msg, self.button_config,(255,255,255))
         textRect.center = ((x + (BUTTON_WIDTH / 2)), (y + (BUTTON_HEIGHT / 2)))
         screen.blit(textSurf, textRect)
 
     # override
     def run_screen(self,screen):
         screen.fill((100,20,0))
-        surface, rect = self.text_objects(self.message_text, self.message_config)
+        surface, rect = self.text_objects(self.message_text, self.message_config,(255,255,255))
         rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 4))
         screen.blit(surface, rect)
         self.check_events(screen)
@@ -57,7 +57,7 @@ class Levels_Manager(Abstract_Manager):
 
 
             self.button(screen,'Normal',100,DISPLAY_HEIGHT * (1 / 2.3),(100,100,100), (51, 153, 255), 2)
-            self.button(screen,'Hard',500,DISPLAY_HEIGHT * (1 / 2.3),(100,100,100), (255, 102, 0), 2)
+            self.button(screen,'Hard',500,DISPLAY_HEIGHT * (1 / 2.3),(100,100,100), (255, 102, 0), 3)
             self.button(screen,'Back',400-(BUTTON_WIDTH/2),DISPLAY_HEIGHT * (1 / 1.5),(100,100,100), (51, 153, 102), 0)
 
             pygame.display.update()
