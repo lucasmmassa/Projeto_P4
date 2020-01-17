@@ -9,6 +9,8 @@ led_on = './images/led-on.png'
 led_off = './images/led-off.png'
 data1 = ('./normal/0/*.png', 0)   # tuples containing path and answer
 data2 = ('./normal/1/*.png', 1)
+data3 = ('./hard/0/*.png', 0)
+data4 = ('./hard/1/*.png', 1)
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
 ANSWER_WIDTH = 100
@@ -143,10 +145,12 @@ class Normal_Manager(Gameplay_Manager):
         self.circuits = generate_circuits(self.circuits, data2)
         shuffle(self.circuits)
 
-
-
 # Inheritance
 class Hard_Manager(Gameplay_Manager):
 
     def __init__(self):
         super().__init__()
+        self.circuits = []
+        self.circuits = generate_circuits(self.circuits, data3)
+        self.circuits = generate_circuits(self.circuits, data4)
+        shuffle(self.circuits)
