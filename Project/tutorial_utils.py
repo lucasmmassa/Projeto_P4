@@ -9,8 +9,10 @@ BUTTON_HEIGHT = 70
 IMAGE_WIDTH = 620
 IMAGE_HEIGHT = 370
 
-def generate_examples_circuits():
-    return 1
+def generate_examples_circuits(circuit):
+    for i in range(1,6):
+        string_path = './images/tutorial/' + str(i) + '.png'
+        circuit.append(pygame.transform.scale(pygame.image.load(string_path),(IMAGE_WIDTH,IMAGE_HEIGHT)))
 
 class Tutorial_Manager(Abstract_Manager):
     def __init__(self):
@@ -71,12 +73,14 @@ class Tutorial_Manager(Abstract_Manager):
 class Examples_Manager(Abstract_Manager):
     def __init__(self):
         self.example_circuits = []
+        self.actual_example = 0
         self.new_manager = None
         self.change_manager = False
         self.run = True
         self.message_text = 'Tutorial'
         self.message_config = pygame.font.Font('./fonts/The Led Display St.ttf', 50)
         self.button_config = pygame.font.Font('./fonts/The Led Display St.ttf', 30)
+        generate_examples_circuits(self.example_circuits)
 
     def text_objects(self, text, font, color):
         surface = font.render(text, True, color)
@@ -106,13 +110,14 @@ class Examples_Manager(Abstract_Manager):
         if x + b_width > mouse[0] > x and y + b_height > mouse[1] > y:
             pygame.draw.rect(screen, ac, (x, y, b_width, b_height))
             if pygame.mouse.get_pressed()[0]:
-                self.new_manager = on_click
+                self.actual_example = ((self.actual_example + on_click) % 5)
         else:
             pygame.draw.rect(screen, ic, (x, y, b_width, b_height))
 
         textSurf, textRect = self.text_objects(msg, self.button_config,(255,255,255))
         textRect.center = ((x + (b_width / 2)), (y + (b_height / 2)))
         screen.blit(textSurf, textRect)
+
 
     def run_screen(self,screen):
         screen.fill((0,0,150))
@@ -127,14 +132,13 @@ class Examples_Manager(Abstract_Manager):
             if event.type == pygame.QUIT:
                 self.run = False
 
-            file_path = './images/tutorial/tutorial_info.png'
-            image_info = pygame.transform.scale(pygame.image.load(file_path),(IMAGE_WIDTH,IMAGE_HEIGHT))
-
-            screen.blit(image_info, (80,190))
+            screen.blit(self.example_circuits[self.actual_example], (100, 200))
 
             self.button(screen, 'Menu', 10, 10, (100, 100, 100),(51, 153, 102), BUTTON_WIDTH, BUTTON_HEIGHT,0)
-            self.button(screen, '<', 200, 550, (100,100,100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, 0)
-            self.button(screen, '>', 500, 550, (100, 100, 100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50,0)
 
+            if(self.actual_example > 0):
+                self.move_examples(screen, '<', 200, 560, (100,100,100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, -1)
+            if(self.actual_example != 4):
+                self.move_examples(screen, '>', 500, 560, (100, 100, 100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, 1)
 
             pygame.display.update()
