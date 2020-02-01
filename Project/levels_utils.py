@@ -42,7 +42,7 @@ class Levels_Manager(Abstract_Manager):
 
     # override
     def run_screen(self,screen):
-        screen.fill((100,20,0))
+        screen.fill((60,0,150))
         surface, rect = self.text_objects(self.message_text, self.message_config,(255,255,255))
         rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 4))
         screen.blit(surface, rect)
