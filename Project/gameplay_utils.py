@@ -52,19 +52,19 @@ class Gameplay_Manager(Abstract_Manager):
     def font_config(self,size):
         return pygame.font.Font('./fonts/The Led Display St.ttf', size)
 
-    def button(self, screen, msg, x, y, ic, ac, on_click):   # render the general buttons
+    def button(self, screen, msg, x, y, ic, ac, b_width, b_height, on_click):
         mouse = pygame.mouse.get_pos()
 
-        if x + BUTTON_WIDTH > mouse[0] > x and y + BUTTON_HEIGHT > mouse[1] > y:
-            pygame.draw.rect(screen, ac, (x, y, BUTTON_WIDTH, BUTTON_HEIGHT))
+        if x + b_width > mouse[0] > x and y + b_height > mouse[1] > y:
+            pygame.draw.rect(screen, ac, (x, y, b_width, b_height))
             if pygame.mouse.get_pressed()[0]:
                 self.change_manager = True
                 self.new_manager = on_click
         else:
-            pygame.draw.rect(screen, ic, (x, y, BUTTON_WIDTH, BUTTON_HEIGHT))
+            pygame.draw.rect(screen, ic, (x, y, b_width, b_height))
 
-        textSurf, textRect = self.text_objects(msg, self.button_config,(0, 0, 40))
-        textRect.center = ((x + (BUTTON_WIDTH / 2)), (y + (BUTTON_HEIGHT / 2)))
+        textSurf, textRect = self.text_objects(msg, self.button_config, (255, 255, 255))
+        textRect.center = ((x + (b_width / 2)), (y + (b_height / 2)))
         screen.blit(textSurf, textRect)
 
     def answer(self, screen, msg, x, y, ic, ac, on_click):   # render the answer buttons
@@ -98,11 +98,12 @@ class Gameplay_Manager(Abstract_Manager):
                 self.run = False
 
             # Display the Menu button
-            self.button(screen,'Menu',0,0,(255, 255, 255), (51, 153, 102), 0)
+            self.button(screen, 'Menu', 10, 10, (0, 0, 0), (51, 153, 102), BUTTON_WIDTH + 10, BUTTON_HEIGHT + 10, 0)
 
             # Display the answer buttons
             self.answer(screen, 'Yes', 600, DISPLAY_HEIGHT * (1 / 2.3), (0,0,40), (255,0,0), 1)
             self.answer(screen, 'No', 600, DISPLAY_HEIGHT * (1 / 1.5), (0,0,40), (100,100,100), 0)
+
 
             # Verifies if the answer was right or wrong
             if self.verify:

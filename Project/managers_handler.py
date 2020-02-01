@@ -1,6 +1,7 @@
 from levels_utils import Levels_Manager
 from menu_utils import Menu_Manager
 from gameplay_utils import *
+from tutorial_utils import *
 
 
 def new_levels_manager():
@@ -15,4 +16,11 @@ def new_normal_manager():
 def new_hard_manager():
     return Hard_Manager()
 
-manager_list = [new_menu_manager, new_levels_manager, new_normal_manager, new_hard_manager]
+def new_tutorial_manager():
+    return Tutorial_Manager()
+
+def new_examples_manager():
+    return Examples_Manager()
+
+manager_list = [new_menu_manager, new_levels_manager, new_normal_manager, new_hard_manager,
+                new_tutorial_manager, new_examples_manager]
