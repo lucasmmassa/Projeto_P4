@@ -20,11 +20,11 @@ pygame.display.set_caption('Will it light up?')
 manager = Menu_Manager()
 
 # background sounds
-# mixer.music.load('sound/Soft-electronic-ambient-background-music.mp3')
+mixer.music.load('sound/Soft-electronic-ambient-background-music.mp3')
 
 # mixer.music.load('sound/Electronic-ambient-background-beat.mp3')
 
-# mixer.music.play(-1)
+mixer.music.play(-1)
 
 while manager.run:
     manager.run_screen(screen)
