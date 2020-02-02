@@ -142,3 +142,14 @@ class Examples_Manager(Abstract_Manager):
                 self.move_examples(screen, '>', 500, 560, (100, 100, 100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, 1)
 
             pygame.display.update()
+
+class Gates_Manager(Abstract_Manager):
+    def __init__(self):
+        self.example_gates = []
+        self.actual_example = 0
+        self.new_manager = None
+        self.change_manager = False
+        self.run = True
+        self.message_text = 'Tutorial'
+        self.message_config = pygame.font.Font('./fonts/The Led Display St.ttf', 50)
+        self.button_config = pygame.font.Font('./fonts/The Led Display St.ttf', 30)
