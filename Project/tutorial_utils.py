@@ -48,7 +48,7 @@ class Tutorial_Manager(Abstract_Manager):
     def run_screen(self,screen):
         screen.fill((0,0,150))
         surface, rect = self.text_objects(self.message_text, self.message_config,(255,255,255))
-        rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 4))
+        rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 5))
         screen.blit(surface, rect)
         self.check_events(screen)
 
@@ -134,7 +134,7 @@ class Examples_Manager(Abstract_Manager):
 
             screen.blit(self.example_circuits[self.actual_example], (100, 50))
 
-            self.button(screen, 'Menu', 3, 3, (100, 100, 100),(51, 153, 102), BUTTON_WIDTH - 40, BUTTON_HEIGHT - 20 ,0)
+            self.button(screen, 'Menu', 2, 2, (100, 100, 100),(51, 153, 102), BUTTON_WIDTH - 40, BUTTON_HEIGHT - 20 ,0)
 
             if(self.actual_example > 0):
                 self.move_examples(screen, '<', 200, 560, (100,100,100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, -1)
