@@ -22,5 +22,8 @@ def new_tutorial_manager():
 def new_examples_manager():
     return Examples_Manager()
 
+def new_gates_manager():
+    return Gates_Manager()
+
 manager_list = [new_menu_manager, new_levels_manager, new_normal_manager, new_hard_manager,
-                new_tutorial_manager, new_examples_manager]
+                new_tutorial_manager, new_examples_manager, new_gates_manager]

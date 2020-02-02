@@ -55,8 +55,8 @@ class Levels_Manager(Abstract_Manager):
             if event.type == pygame.QUIT:
                 self.run = False
 
-            self.button(screen,'Normal',100,DISPLAY_HEIGHT * (1 / 2.3),(100,100,100), (51, 153, 255), BUTTON_WIDTH, BUTTON_HEIGHT, 2)
-            self.button(screen,'Hard',500,DISPLAY_HEIGHT * (1 / 2.3),(100,100,100), (255, 102, 0), BUTTON_WIDTH, BUTTON_HEIGHT, 3)
+            self.button(screen,'Normal',100,DISPLAY_HEIGHT * (1 / 2.3),(20,10,60), (51, 153, 255), BUTTON_WIDTH, BUTTON_HEIGHT, 2)
+            self.button(screen,'Hard',500,DISPLAY_HEIGHT * (1 / 2.3),(200,10,10), (155, 12, 100), BUTTON_WIDTH, BUTTON_HEIGHT, 3)
             self.button(screen,'Back',400-(BUTTON_WIDTH/2),DISPLAY_HEIGHT * (1 / 1.5),(100,100,100), (51, 153, 102), BUTTON_WIDTH, BUTTON_HEIGHT, 0)
 
             pygame.display.update()
