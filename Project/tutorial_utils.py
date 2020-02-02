@@ -10,9 +10,9 @@ IMAGE_WIDTH = 620
 IMAGE_HEIGHT = 370
 
 def generate_examples_circuits(circuit):
-    for i in range(1,6):
+    for i in range(1,7):
         string_path = './images/tutorial/' + str(i) + '.png'
-        circuit.append(pygame.transform.scale(pygame.image.load(string_path),(IMAGE_WIDTH,IMAGE_HEIGHT)))
+        circuit.append(pygame.transform.scale(pygame.image.load(string_path),(IMAGE_WIDTH,IMAGE_HEIGHT + 150)))
 
 class Tutorial_Manager(Abstract_Manager):
     def __init__(self):
@@ -110,7 +110,7 @@ class Examples_Manager(Abstract_Manager):
         if x + b_width > mouse[0] > x and y + b_height > mouse[1] > y:
             pygame.draw.rect(screen, ac, (x, y, b_width, b_height))
             if pygame.mouse.get_pressed()[0]:
-                self.actual_example = ((self.actual_example + on_click) % 5)
+                self.actual_example = ((self.actual_example + on_click) % 6)
         else:
             pygame.draw.rect(screen, ic, (x, y, b_width, b_height))
 
@@ -122,8 +122,8 @@ class Examples_Manager(Abstract_Manager):
     def run_screen(self,screen):
         screen.fill((0,0,150))
         surface, rect = self.text_objects(self.message_text, self.message_config,(255,255,255))
-        rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 4))
-        screen.blit(surface, rect)
+        rect.center = (DISPLAY_WIDTH / 2, DISPLAY_HEIGHT * (1 / 18))
+        # screen.blit(surface, rect)
         self.check_events(screen)
 
     def check_events(self, screen):
@@ -132,13 +132,13 @@ class Examples_Manager(Abstract_Manager):
             if event.type == pygame.QUIT:
                 self.run = False
 
-            screen.blit(self.example_circuits[self.actual_example], (100, 200))
+            screen.blit(self.example_circuits[self.actual_example], (100, 50))
 
-            self.button(screen, 'Menu', 10, 10, (100, 100, 100),(51, 153, 102), BUTTON_WIDTH, BUTTON_HEIGHT,0)
+            self.button(screen, 'Menu', 3, 3, (100, 100, 100),(51, 153, 102), BUTTON_WIDTH - 40, BUTTON_HEIGHT - 20 ,0)
 
             if(self.actual_example > 0):
                 self.move_examples(screen, '<', 200, 560, (100,100,100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, -1)
-            if(self.actual_example != 4):
+            if(self.actual_example != 5):
                 self.move_examples(screen, '>', 500, 560, (100, 100, 100), (51, 153, 102), BUTTON_WIDTH - 100, BUTTON_HEIGHT - 50, 1)
 
             pygame.display.update()
